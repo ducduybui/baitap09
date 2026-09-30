@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xác nhận OTP</title>
+</head>
+
+<body>
+
+<h2>Xác nhận OTP</h2>
+
+<div
+    th:if="${success}"
+    style="color: green;"
+    th:text="${success}">
+</div>
+
+<div
+    th:if="${error}"
+    style="color: red;"
+    th:text="${error}">
+</div>
+
+<form th:action="@{/verify-otp}" method="post">
+
+    <input
+        type="hidden"
+        name="email"
+        th:value="${email}">
+
+    <div>
+        <label>Email</label>
+
+        <input
+            type="email"
+            th:value="${email}"
+            readonly>
+    </div>
+
+    <br>
+
+    <div>
+        <label>OTP</label>
+
+        <input
+            type="text"
+            name="otp"
+            maxlength="6"
+            required>
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Xác nhận OTP
+    </button>
+
+</form>
+
+<br>
+
+<a
+    th:href="@{/resend-register-otp(email=${email})}">
+    Gửi lại OTP
+</a>
+
+<br><br>
+
+<a th:href="@{/login}">
+    Quay lại đăng nhập
+</a>
+
+</body>
+</html>

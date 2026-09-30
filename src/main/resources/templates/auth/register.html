@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/layout :: head('Đăng ký')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="container auth-page">
+    <div class="card auth-card">
+        <h1>Đăng ký</h1>
+
+        <div class="alert error" th:if="${error}" th:text="${error}"></div>
+
+        <form th:action="@{/register}" th:object="${registerDTO}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <label>Username</label>
+            <input type="text" th:field="*{username}">
+            <small class="field-error" th:errors="*{username}"></small>
+
+            <label>Email</label>
+            <input type="email" th:field="*{email}">
+            <small class="field-error" th:errors="*{email}"></small>
+
+            <label>Họ tên</label>
+            <input type="text" th:field="*{fullName}">
+            <small class="field-error" th:errors="*{fullName}"></small>
+
+            <label>Mật khẩu</label>
+            <input type="password" th:field="*{password}">
+            <small class="field-error" th:errors="*{password}"></small>
+
+            <label>Xác nhận mật khẩu</label>
+            <input type="password" th:field="*{confirmPassword}">
+            <small class="field-error" th:errors="*{confirmPassword}"></small>
+
+            <button class="btn" type="submit">Đăng ký</button>
+        </form>
+
+        <p><a th:href="@{/login}">Đã có tài khoản? Đăng nhập</a></p>
+    </div>
+</main>
+</body>
+</html>

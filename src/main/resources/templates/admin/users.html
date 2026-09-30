@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý User</title>
+</head>
+<body>
+
+<h2>QUẢN LÝ USER</h2>
+
+<a th:href="@{/}">Trang chủ</a>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Họ tên</th>
+        <th>Role</th>
+        <th>Enabled</th>
+        <th>Thao tác</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.fullName}"></td>
+        <td th:text="${u.role.name}"></td>
+        <td th:text="${u.enabled}"></td>
+
+        <td>
+            <a th:href="@{/admin/users/delete/{id}(id=${u.id})}"
+               onclick="return confirm('Xóa tài khoản này?')">
+                Xóa
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

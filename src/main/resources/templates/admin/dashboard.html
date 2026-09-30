@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/layout :: head('Dashboard')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="container page">
+    <h1>Admin Dashboard</h1>
+
+    <div class="stats">
+        <div class="stat"><span>Tổng User</span><strong th:text="${totalUsers}">0</strong></div>
+        <div class="stat"><span>Đang hoạt động</span><strong th:text="${enabledUsers}">0</strong></div>
+        <div class="stat"><span>Bị khóa</span><strong th:text="${disabledUsers}">0</strong></div>
+        <div class="stat"><span>Admin</span><strong th:text="${adminUsers}">0</strong></div>
+        <div class="stat"><span>User</span><strong th:text="${normalUsers}">0</strong></div>
+    </div>
+
+    <div class="quick-links">
+        <a class="btn" th:href="@{/users}">Quản lý User</a>
+        <a class="btn" th:href="@{/products}">Quản lý Product</a>
+    </div>
+</main>
+</body>
+</html>

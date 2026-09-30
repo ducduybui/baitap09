@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý User</title>
+</head>
+
+<body>
+
+<h1 th:text="${user.id == null ? 'THÊM USER' : 'SỬA USER'}">
+    THÊM USER
+</h1>
+
+<form th:action="@{/admin/users/save}"
+      th:object="${user}"
+      method="post">
+
+    <!-- ID -->
+    <input type="hidden" th:field="*{id}">
+
+    <!-- EMAIL -->
+    <div>
+        <label>Email:</label>
+        <input type="email"
+               th:field="*{email}"
+               required>
+    </div>
+
+    <br>
+
+    <!-- PASSWORD -->
+    <div>
+        <label>Password:</label>
+
+        <input type="password"
+               th:field="*{password}"
+               th:placeholder="${user.id == null
+                    ? 'Nhập password'
+                    : 'Để trống nếu không đổi'}"
+               th:required="${user.id == null}">
+    </div>
+
+    <br>
+
+    <!-- FULL NAME -->
+    <div>
+        <label>Họ tên:</label>
+
+        <input type="text"
+               th:field="*{fullName}"
+               required>
+    </div>
+
+    <br>
+
+    <!-- ROLE -->
+    <div>
+        <label>Role:</label>
+
+        <select name="roleId" required>
+
+            <option value="">
+                -- Chọn Role --
+            </option>
+
+            <option th:each="role : ${roles}"
+                    th:value="${role.id}"
+                    th:text="${role.name}"
+                    th:selected="${user.role != null
+                        and user.role.id == role.id}">
+            </option>
+
+        </select>
+    </div>
+
+    <br>
+
+    <!-- ENABLED -->
+    <div>
+        <label>
+            <input type="checkbox"
+                   th:field="*{enabled}">
+            Kích hoạt tài khoản
+        </label>
+    </div>
+
+    <br>
+
+    <!-- BUTTON -->
+    <button type="submit">
+        Lưu
+    </button>
+
+    <a th:href="@{/admin/users}">
+        Hủy
+    </a>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/layout :: head('Trang chủ')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="container page">
+    <section class="hero">
+        <h1>IOTSTAR SHOP</h1>
+        <p>Spring Boot 4.1.1 + Spring Security 7 + Thymeleaf + MySQL</p>
+
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <h2>Xin chào, <span th:text="${#authentication.principal.fullName}">User</span></h2>
+            <p>Email: <b th:text="${#authentication.principal.email}">email</b></p>
+            <p>Username: <b th:text="${#authentication.principal.username}">username</b></p>
+            <p>Role: <b th:text="${#authentication.principal.role}">ROLE_USER</b></p>
+        </div>
+
+        <div th:unless="${#authorization.expression('isAuthenticated()')}">
+            <a class="btn" th:href="@{/login}">Đăng nhập</a>
+            <a class="btn btn-secondary" th:href="@{/register}">Đăng ký</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
